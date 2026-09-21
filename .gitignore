@@ -1,0 +1,9 @@
+node_modules
+dist
+site
+.netlify
+.netlify-link-backup
+.DS_Store
+*.log
+.env
+.env.local

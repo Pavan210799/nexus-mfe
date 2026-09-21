@@ -1,0 +1,23 @@
+{
+  "name": "micro-frontend-dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "host",
+    "auth",
+    "dashboard",
+    "users",
+    "analytics",
+    "notifications"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build:remotes": "npm run build -w auth && npm run build -w dashboard && npm run build -w users && npm run build -w analytics && npm run build -w notifications",
+    "build:web": "node scripts/build-option-b.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

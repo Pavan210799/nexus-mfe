@@ -1,0 +1,71 @@
+[build]
+  command = "npm run build:web"
+  publish = "site"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/auth"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/auth/"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/dashboard/"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/users"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/users/"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/analytics"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/analytics/"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/notifications"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/notifications/"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
