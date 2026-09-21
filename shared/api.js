@@ -85,7 +85,7 @@ export async function signupRequest(name, email, password) {
     createdAt: new Date().toISOString().slice(0, 10)
   };
 
-  users.push(user);
+  users.unshift(user);
   setUsers(users);
   setSession(user);
   return user;
@@ -126,7 +126,7 @@ export async function addUserRequest(payload) {
     createdAt: new Date().toISOString().slice(0, 10)
   };
 
-  users.push(user);
+  users.unshift(user);
   setUsers(users);
   return user;
 }

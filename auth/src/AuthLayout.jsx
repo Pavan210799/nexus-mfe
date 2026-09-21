@@ -5,17 +5,17 @@ export function AuthLayout(props) {
     <div className="auth-shell">
       <AuthBackground />
       <section className="auth-copy">
-        <p className="auth-copy-kicker">NEXUS ADMIN</p>
+        <p className="auth-copy-kicker">NEXUS</p>
         <h2 className="auth-copy-title">
-          One shell. Five independent modules. One premium workspace.
+          The workspace your operations team actually opens every morning.
         </h2>
         <p className="auth-copy-lead">
-          Authentication, users, analytics, and alerts stay in their own apps, then load into this host at runtime.
+          See who is on the team, follow growth across departments, and catch alerts before they pile up — all from one signed-in workspace.
         </p>
         <div className="auth-copy-list">
-          <p>Protected routes with a shared session</p>
-          <p>Indigo light and dark workspace</p>
-          <p>Live charts from the same local user list</p>
+          <p>Invite people and keep roles up to date</p>
+          <p>Track headcount and department health</p>
+          <p>Stay on top of unread alerts in one inbox</p>
         </div>
       </section>
       <div className="auth-form-wrap">{props.children}</div>

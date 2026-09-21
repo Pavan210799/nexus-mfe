@@ -342,6 +342,16 @@ body {
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
+.stat-card-click {
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+}
+
 .stat-body {
   display: flex;
   align-items: flex-start;
@@ -463,6 +473,17 @@ body {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 28px;
+}
+
+.hero-actions .btn-ghost {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.hero-actions .btn-ghost:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.62);
 }
 
 .fill-card {

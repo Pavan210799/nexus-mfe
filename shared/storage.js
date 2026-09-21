@@ -23,6 +23,7 @@ export function getUsers() {
 
 export function setUsers(users) {
   writeJson(USERS_KEY, users);
+  window.dispatchEvent(new Event("users-changed"));
 }
 
 export function getSession() {

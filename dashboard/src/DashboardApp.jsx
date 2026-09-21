@@ -44,8 +44,10 @@ export default function DashboardApp() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  async function loadData() {
-    setLoading(true);
+  async function loadData(quiet) {
+    if (!quiet) {
+      setLoading(true);
+    }
     setError("");
 
     try {
@@ -62,6 +64,16 @@ export default function DashboardApp() {
 
   useEffect(function () {
     loadData();
+
+    function onUsersChanged() {
+      loadData(true);
+    }
+
+    window.addEventListener("users-changed", onUsersChanged);
+
+    return function () {
+      window.removeEventListener("users-changed", onUsersChanged);
+    };
   }, []);
 
   if (loading) {
@@ -92,16 +104,16 @@ export default function DashboardApp() {
   }
 
   const depts = countBy(users, "department");
-  const recent = users.slice(0, 6);
+  const recent = users.slice(0, 5);
   const latestNotes = notes.slice(0, 4);
   const trend = growthLine(users);
   const hello = session ? session.name.split(" ")[0] : "there";
 
   const cards = [
-    { label: "People", value: users.length, hint: "Across all departments", icon: Users },
-    { label: "Admins", value: adminCount, hint: "Full workspace access", icon: Shield },
-    { label: "Moderators", value: modCount, hint: "Team leads", icon: Sparkles },
-    { label: "Unread alerts", value: unread, hint: "Needs a look today", icon: Bell }
+    { label: "People", value: users.length, hint: "Across all departments", icon: Users, to: "/users" },
+    { label: "Admins", value: adminCount, hint: "Full workspace access", icon: Shield, to: "/users?role=admin" },
+    { label: "Moderators", value: modCount, hint: "Team leads", icon: Sparkles, to: "/users?role=moderator" },
+    { label: "Unread alerts", value: unread, hint: "Needs a look today", icon: Bell, to: "/notifications" }
   ];
 
   return (
@@ -127,7 +139,6 @@ export default function DashboardApp() {
             </Button>
             <Button
               kind="ghost"
-              className="border-white/30 text-white hover:bg-white/10"
               onClick={function () {
                 navigate("/analytics");
               }}
@@ -156,7 +167,13 @@ export default function DashboardApp() {
         {cards.map(function (card) {
           const Icon = card.icon;
           return (
-            <Card key={card.label} className="stat-card">
+            <Card
+              key={card.label}
+              className="stat-card stat-card-click"
+              onClick={function () {
+                navigate(card.to);
+              }}
+            >
               <div className="stat-body">
                 <div>
                   <p className="stat-label">{card.label}</p>

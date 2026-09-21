@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Search, Pencil, Trash2 } from "lucide-react";
 import {
   addUserRequest,
@@ -30,11 +31,13 @@ const emptyForm = {
 };
 
 export default function UsersApp() {
+  const [params] = useSearchParams();
+  const roleFromUrl = params.get("role") || "all";
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
-  const [role, setRole] = useState("all");
+  const [role, setRole] = useState(roleFromUrl === "admin" || roleFromUrl === "moderator" || roleFromUrl === "user" ? roleFromUrl : "all");
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState(null);
@@ -58,6 +61,14 @@ export default function UsersApp() {
   useEffect(function () {
     loadUsers();
   }, []);
+
+  useEffect(function () {
+    const nextRole = params.get("role") || "all";
+    if (nextRole === "admin" || nextRole === "moderator" || nextRole === "user" || nextRole === "all") {
+      setRole(nextRole);
+      setPage(1);
+    }
+  }, [params]);
 
   function changeField(key, value) {
     setForm({
@@ -95,6 +106,9 @@ export default function UsersApp() {
         await updateUserRequest(editing.id, form);
       } else {
         await addUserRequest(form);
+        setQuery("");
+        setRole("all");
+        setPage(1);
       }
       setOpen(false);
       await loadUsers();
